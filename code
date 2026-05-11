@@ -1,0 +1,45 @@
+# =========================
+# TASK 5 - SALES ANALYSIS (FIXED VERSION)
+# =========================
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load built-in dataset (NO INTERNET ERROR)
+df = sns.load_dataset("tips")
+
+print(df.head())
+
+# Rename for your assignment style
+df.rename(columns={
+    "total_bill": "Sales",
+    "tip": "Profit",
+    "day": "Category"
+}, inplace=True)
+
+# =========================
+# SALES ANALYSIS
+# =========================
+
+category_sales = df.groupby("Category")["Sales"].sum()
+
+plt.figure(figsize=(7,5))
+category_sales.plot(kind="bar")
+plt.title("Sales by Category")
+plt.ylabel("Sales")
+plt.show()
+
+# =========================
+# PROFIT ANALYSIS
+# =========================
+
+category_profit = df.groupby("Category")["Profit"].sum()
+
+plt.figure(figsize=(7,5))
+category_profit.plot(kind="bar")
+plt.title("Profit by Category")
+plt.ylabel("Profit")
+plt.show()
+
+print("Sales Analysis Completed Successfully ")
